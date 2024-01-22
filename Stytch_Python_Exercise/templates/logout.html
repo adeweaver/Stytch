@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        /* Additional styles to ensure the background image covers the whole page */
+        .background-image {
+          background: url('../static/images/background.png') no-repeat center center fixed; 
+          background-size: cover;
+        }
+        /* Positioning the logo at the top of the modal */
+        .logo-placeholder {
+          position: absolute;
+          top: -50px; /* Adjust as necessary */
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100px; /* Adjust as necessary */
+          height: 50px; /* Adjust as necessary */
+        }
+      </style>
+</head>
+<body class="background-image">
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <div class="bg-white p-8 rounded-lg shadow-lg relative" style="width: 400px">
+      <!-- Positioned placeholder for the ESPN logo -->
+      <img src="../static/images/logo-espn-82x20.png" alt="Placeholder for ESPN logo" class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+      
+      <div class="text-center">
+        <h2 class="text-2xl mb-2">Thanks for Visiting!</h2>
+        <p class="mb-4 text-sm text-gray-600">You're Logged Out</p>
+        <!-- Button to go back to home page -->
+        <a href="/" class="mt-4 inline-block text-sm px-4 py-2 leading-none mt-4 lg:mt-0">Return to Home Page</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

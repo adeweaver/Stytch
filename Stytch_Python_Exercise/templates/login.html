@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        /* Additional styles to ensure the background image covers the whole page */
+        .background-image {
+          background: url('../static/images/background.png') no-repeat center center fixed; 
+          background-size: cover;
+        }
+        /* Positioning the logo at the top of the modal */
+        .logo-placeholder {
+          position: absolute;
+          top: -50px; /* Adjust as necessary */
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100px; /* Adjust as necessary */
+          height: 50px; /* Adjust as necessary */
+        }
+      </style>
+</head>
+<body class="background-image">
+    <div class="min-h-screen flex items-center justify-center px-4">
+      <div class="bg-white p-8 rounded-lg shadow-lg relative" style="width: 400px">
+        <!-- Positioned placeholder for the ESPN logo -->
+        <img src="../static/images/logo-espn-82x20.png" alt="Placeholder for ESPN logo" class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+        
+        <div class="text-center">
+          <h2 class="text-2xl mb-2">You're Logged In!</h2>
+          <form action="{{ url_for('logout')}}" method="GET">
+            <div class="actions">
+                <button action="{{ url_for('logout')}}" method="GET" class="flex items-center justify-center w-full bg-white-500 text-black p-3 rounded mb-4" type="submit">
+                    <img src="{{ url_for('static', filename='images/arrow.png') }}" alt="Arrow" class="mr-2">
+                    Logout
+                </button>
+                <!-- <input type="text" class="border w-full p-3 mb-4 rounded" name="email" placeholder="example@email.com" />
+                <button class="w-full bg-blue-500 text-white p-3 rounded mb-4">Continue</button> -->
+                <!-- <input class="arrow" type="image" src="{{ url_for('static', filename= 'images/arrow.png') }}"> -->
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+flask[async]~=2.2
+python-dotenv~=0.20
+stytch~=7.6

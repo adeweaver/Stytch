@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Passcode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        .background-image {
+            background: url('../static/images/background.png') no-repeat center center fixed; 
+            background-size: cover;
+        }
+        .logo-placeholder {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 50px;
+        }
+        .passcode-box {
+            width: 3rem; /* Adjust as necessary */
+            height: 3.5rem; /* Adjust as necessary */
+            margin-right: 0.5rem; /* Space between boxes */
+        }
+        .passcode-box:last-child {
+            margin-right: 0;
+        }
+        .digit-input {
+            text-align: center;
+            font-size: 2rem; /* Adjust as necessary */
+        }
+        /* Custom style for the resend link */
+        .resend-link {
+            color: #3B82F6; /* Tailwind blue-500 */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="background-image">
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="bg-white p-8 rounded-lg shadow-lg relative" style="width: 400px">
+            <!-- Positioned placeholder for the ESPN logo -->
+            <img src="../static/images/logo-espn-82x20.png" alt="Placeholder for ESPN logo" class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+            
+            <div class="text-center">
+                <h2 class="text-2xl mb-2">Enter passcode</h2>
+                <p class="mb-4 text-sm text-gray-600">A 6-digit passcode was sent to you at<br/>(415) 123-4567.</p>
+                <form action="{{ url_for('authenticate')}}" onsubmit="return submitOTP();">
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <input type="text" class="passcode-box border border-gray-300 rounded shadow-sm digit-input" maxlength="1">
+                        <input type="text" class="passcode-box border border-gray-300 rounded shadow-sm digit-input" maxlength="1">
+                        <input type="text" class="passcode-box border border-gray-300 rounded shadow-sm digit-input" maxlength="1">
+                        <input type="text" class="passcode-box border border-gray-300 rounded shadow-sm digit-input" maxlength="1">
+                        <input type="text" class="passcode-box border border-gray-300 rounded shadow-sm digit-input" maxlength="1">
+                        <input type="text" class="passcode-box border border-gray-300 rounded shadow-sm digit-input" maxlength="1">
+                    </div>
+                    <p class="mb-4 text-sm"><a class="resend-link">Didn't get it? Resend code</a></p>
+                    <input type="hidden" name="otp_code" id="otp_code">
+                    <button class="w-full bg-black text-white p-3 rounded mb-4">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitOTP() {
+            var inputs = document.getElementsByClassName('digit-input');
+            var otp = '';
+            for(var i = 0; i < inputs.length; i++) {
+                otp += inputs[i].value;
+            }
+            document.getElementById('otp_code').value = otp;
+            return true; 
+        }
+    </script>
+</body>
+</html>

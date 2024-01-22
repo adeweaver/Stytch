@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  /* Additional styles to ensure the background image covers the whole page */
+  .background-image {
+    background: url('../static/images/background.png') no-repeat center center fixed; 
+    background-size: cover;
+  }
+  /* Positioning the logo at the top of the modal */
+  .logo-placeholder {
+    position: absolute;
+    top: -50px; /* Adjust as necessary */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Adjust as necessary */
+    height: 50px; /* Adjust as necessary */
+  }
+  .google-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  }
+</style>
+</head>
+<body class="background-image">
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white p-8 rounded-lg shadow-lg relative" style="width: 400px">
+    <img src="../static/images/logo-espn-82x20.png" alt="Placeholder for ESPN logo" class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+    
+    <div class="text-center mb-4 space-x-4">
+      <button id="email-btn" class="toggle-btn text-lg font-semibold px-4 py-2 rounded-md focus:outline-none">Email</button>
+      <button id="phone-btn" class="toggle-btn text-lg font-semibold px-4 py-2 rounded-md focus:outline-none">Phone</button>
+    </div>
+    
+    <form id="email-form" action="{{ url_for('login_or_create_user')}}" method="POST">
+      <h2 class="text-2xl mb-2">Enter your email</h2>
+      <p class="mb-4 text-sm text-gray-600">Log into your ESPN account. If you don't have one, you will be prompted to create one.</p>
+      <input type="text" class="border w-full p-3 mb-4 rounded" name="user_input" placeholder="example@email.com" />
+      <button class="w-full bg-blue-500 text-white p-3 rounded mb-4">Continue</button>
+    </form>
+    
+    <form id="phone-form" action="{{ url_for('login_or_create_user')}}" method="POST" class="hidden">
+      <h2 class="text-2xl mb-2">Enter phone number</h2>
+      <p class="mb-4 text-sm text-gray-600">Enter your phone number to receive a passcode for authentication.</p>
+      <input type="text" class="border w-full p-3 mb-4 rounded" name="user_input" placeholder="+1 (123) 456-7890" />
+      <button class="w-full bg-blue-500 text-white p-3 rounded mb-4">Continue</button>
+      <p class="text-xs text-gray-500">By continuing, you may receive an SMS for verification. Message and data rates may apply.</p>
+    </form>
+    
+    <div class="flex items-center justify-center py-4">
+      <div class="flex-grow border-t border-gray-300"></div>
+      <span class="flex-shrink mx-4 text-gray-600">or</span>
+      <div class="flex-grow border-t border-gray-300"></div>
+    </div>
+
+    <a href="https://test.stytch.com/v1/public/oauth/google/start?public_token=public-token-test-a22e42a5-bb1b-4eae-96a4-041fd6275c10" 
+      class="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-3">
+      <img src="../static/images/google-logo.png" alt="Google logo placeholder" class="mr-2 w-10">
+      Continue with Google
+    </a>
+
+    <div class="text-center text-sm">
+      <p class="mb-4">ESPN is part of The Walt Disney Family of Companies.</p>
+      <p class="text-gray-600 mb-4">This email and password lets you seamlessly log into services and experiences across The Walt Disney Family of Companies, such as ESPN, Walt Disney World, Marvel, and <a href="#" class="text-blue-500 underline">more</a>.</p>
+      <p class="text-gray-600">If you've used your email with one of our services, please use it here too.</p>
+    </div>
+    <div class="flex justify-center mt-4">
+      <!-- Placeholder images with detailed description for the image generation AI -->
+      <img src="../static/images/disney.png" alt="Placeholder for Disney logo" class="mx-1 w-10 h-10">
+      <img src="../static/images/abc.png" alt="Placeholder for ABC logo" class="mx-1 w-10 h-10">
+      <img src="../static/images/espn.png" alt="Placeholder for ESPN logo" class="mx-1 w-10 h-10">
+      <img src="../static/images/marvel.png" alt="Placeholder for Marvel logo" class="mx-1 w-10 h-10">
+      <img src="../static/images/starwars.png" alt="Placeholder for Star Wars logo" class="mx-1 w-10 h-10">
+      <img src="../static/images/hulu.png" alt="Placeholder for Hulu logo" class="mx-1 w-10 h-10">
+      <img src="../static/images/natGeo.png" alt="Placeholder for National Geographic logo" class="mx-1 w-10 h-10">
+      <img src="../static/images/star.png" alt="Placeholder for Star logo" class="mx-1 w-10 h-10">
+    </div>
+    <div class="text-center text-sm mt-4">
+      <a href="#" class="text-blue-500 underline">Looking for username login?</a>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('email-btn').addEventListener('click', () => {
+      document.getElementById('phone-form').classList.add('hidden');
+      document.getElementById('email-form').classList.remove('hidden');
+    });
+    document.getElementById('phone-btn').addEventListener('click', () => {
+      document.getElementById('email-form').classList.add('hidden');
+      document.getElementById('phone-form').classList.remove('hidden');
+    });
+  });
+
+  function setActiveButton(active) {
+    const emailBtn = document.getElementById('email-btn');
+    const phoneBtn = document.getElementById('phone-btn');
+    
+    if(active === 'email') {
+      emailBtn.classList.add('text-black', 'bg-gray-200');
+      emailBtn.classList.remove('text-gray-400', 'bg-white');
+      phoneBtn.classList.add('text-gray-400', 'bg-white');
+      phoneBtn.classList.remove('text-black', 'bg-gray-200');
+    } else {
+      phoneBtn.classList.add('text-black', 'bg-gray-200');
+      phoneBtn.classList.remove('text-gray-400', 'bg-white');
+      emailBtn.classList.add('text-gray-400', 'bg-white');
+      emailBtn.classList.remove('text-black', 'bg-gray-200');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const emailBtn = document.getElementById('email-btn');
+    const phoneBtn = document.getElementById('phone-btn');
+    const emailForm = document.getElementById('email-form');
+    const phoneForm = document.getElementById('phone-form');
+    
+    emailBtn.addEventListener('click', () => {
+      emailForm.classList.remove('hidden');
+      phoneForm.classList.add('hidden');
+      setActiveButton('email');
+    });
+    
+    phoneBtn.addEventListener('click', () => {
+      phoneForm.classList.remove('hidden');
+      emailForm.classList.add('hidden');
+      setActiveButton('phone');
+    });
+
+    // Set initial active button
+    setActiveButton('email');
+  });
+</script>
+</body>
+</html>
