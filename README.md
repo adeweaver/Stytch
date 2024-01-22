@@ -2,6 +2,10 @@
 
 Testing out Stytch's APIs to create a simple Python Flask web application
 
+<p align="center">
+  <img src="./Stytch_Python_Exercise/static/images/screenshot.png" height="500">
+</p>
+
 ##### Prerequisites
 
 Ensure you have pip, python and virtualenv installed
