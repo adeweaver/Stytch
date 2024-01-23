@@ -47,7 +47,7 @@
             
             <div class="text-center">
                 <h2 class="text-2xl mb-2">Enter passcode</h2>
-                <p class="mb-4 text-sm text-gray-600">A 6-digit passcode was sent to you at<br/>(415) 123-4567.</p>
+                <p class="mb-4 text-sm text-gray-600">A 6-digit passcode was sent to you.</p>
                 <form action="{{ url_for('authenticate')}}" onsubmit="return submitOTP();">
                     <div class="flex justify-center space-x-2 mb-4">
                         <input type="text" class="passcode-box border border-gray-300 rounded shadow-sm digit-input" maxlength="1">
